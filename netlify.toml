@@ -1,0 +1,8 @@
+# Rakkad Aqua care site — build & publish config.
+# On every commit, Netlify runs the generator and publishes the fresh site.
+[build]
+  command = "pip install -r requirements.txt && python3 build_hub.py master.csv"
+  publish = "rakkad-aqua-hub-site"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"
