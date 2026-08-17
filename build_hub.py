@@ -164,6 +164,13 @@ with open(f"{SITE}/master.csv","w",newline="") as f:
     for r in rows: w.writerow(r)
 json.dump(rows, open(f"{SITE}/master.json","w"), indent=1, ensure_ascii=False)
 
+# species.json — the trimmed 16-field feed the Hub tank system reads.
+# Emitted every build so a new fish in master.csv appears in the Hub after Sync.
+SPECIES_FIELDS = ["slug","common","group","care","temperament","tank","adult","tempC",
+                  "ph","hard","diet","social","handle","hub_url","shop_url","aqa_staple"]
+species = [{k: r.get(k, "") for k in SPECIES_FIELDS} for r in rows]
+json.dump(species, open(f"{SITE}/species.json","w"), indent=1, ensure_ascii=False)
+
 # gallery
 import index_hub
 index_hub.build(rows, SITE)
